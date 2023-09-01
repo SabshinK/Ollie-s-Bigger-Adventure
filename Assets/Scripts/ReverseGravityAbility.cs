@@ -25,13 +25,8 @@ public class ReverseGravityAbility : MonoBehaviour
     private void Awake()
     {
         Physics.gravity = Vector3.down * 9.8f;
-        //to = GameObject.Find(nameOfCharacterController).GetComponent<Transform>().rotation;
         to = playerModel.rotation;
         from = Quaternion.Euler(playerModel.rotation.eulerAngles.x + 180, playerModel.rotation.eulerAngles.y, playerModel.rotation.eulerAngles.z);
-
-        //controls = new InputControls();
-        //controls.SideScrollerMechanics.ReverseGravity.Enable();
-        //reverseGravityButton = (ButtonControl)controls.SideScrollerMechanics.ReverseGravity.controls[0];
 
         gravityAction = InputHandler.GetAction("Toggle Gravity");
     }
@@ -55,12 +50,6 @@ public class ReverseGravityAbility : MonoBehaviour
         //to = GameObject.Find(nameOfCharacterController).GetComponent<Transform>().rotation;
         //to = transform.rotation;
 
-        // FlipGravity will be called from an event instead of checking each frame; performance reasons.
-        //if (reverseGravityButton.wasPressedThisFrame)
-        //{
-        //    FlipGravity();
-        //}
-
         // We will use the local rotation because we are changing the root object rotation somewhere else
         if (playerModel.localRotation != to)
             playerModel.localRotation = Quaternion.Slerp(playerModel.localRotation, to, rotationSmoothing);
@@ -72,12 +61,6 @@ public class ReverseGravityAbility : MonoBehaviour
         Vector3 gravity = Physics.gravity;
         gravity.y *= -1;
         Physics.gravity = gravity;
-
-        // Rotate the character so you aren't walking on your head
-        //to = Quaternion.Euler(GameObject.Find(nameOfCharacterController).GetComponent<Transform>().rotation.eulerAngles.x + 180, GameObject.Find(nameOfCharacterController).GetComponent<Transform>().rotation.eulerAngles.y,
-        //    GameObject.Find(nameOfCharacterController).GetComponent<Transform>().rotation.eulerAngles.z);
-        //GameObject.Find(nameOfCharacterController).GetComponent<Transform>().rotation = to;
-        //GameObject.Find(nameOfCharacterController).GetComponent<Transform>().Rotate(new Vector3(0, 180, 0));
 
         // Cache the old model rotation and calculate the new rotation
         Quaternion temp = to;

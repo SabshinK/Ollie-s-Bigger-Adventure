@@ -1,5 +1,5 @@
 {
-    "name": "Player Inputs",
+    "name": "Inputs",
     "maps": [
         {
             "name": "Player",
@@ -20,7 +20,7 @@
                     "id": "32bd2bb2-f99a-4e8e-9d1d-5f6fd9602211",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold(duration=1.5)",
                     "initialStateCheck": false
                 }
             ],
@@ -59,15 +59,37 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "a79ad94b-4cd8-48f5-aeba-155887120516",
-                    "path": "<Keyboard>/w",
+                    "name": "A + D",
+                    "id": "d0239b31-b519-4eb6-90f6-54b9cfd1b014",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toggle Gravity",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "dc00ce15-a7da-4db7-9c77-8e5e3e5b3d58",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Toggle Gravity",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "63f882ce-cb59-428e-a981-bcd5e5177c38",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toggle Gravity",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
