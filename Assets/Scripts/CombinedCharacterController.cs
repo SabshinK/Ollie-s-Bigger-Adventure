@@ -155,10 +155,10 @@ public class CombinedCharacterController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.right, out hit, 0.65f) || Physics.Raycast(transform.position, Vector3.left, out hit, 0.65f))
         {
-            if(!hit.collider.gameObject.CompareTag("WallJump"))
-            {
-                maxAirAcceleration = 0.03f;
-            }
+            //if(!hit.collider.gameObject.CompareTag("WallJump"))
+            //{
+            //    maxAirAcceleration = 0.03f;
+            //}
         }
         else
         {
@@ -169,6 +169,8 @@ public class CombinedCharacterController : MonoBehaviour
 
         // No jumping in this game
         //desiredJump |= jumpButton.isPressed;
+
+
     }
 
 
@@ -190,8 +192,8 @@ public class CombinedCharacterController : MonoBehaviour
 
 
         Vector3 velocity = body.velocity;
-        Vector3 scaledVelocity = Vector3.ClampMagnitude(new Vector3(velocity.x, 0, velocity.z), maxSpeed);
-        scaledVelocity.y = body.velocity.y;
+        Vector3 scaledVelocity = Vector3.ClampMagnitude(new Vector3(velocity.x, 0, velocity.z), maxSpeed) + Vector3.ClampMagnitude(new Vector3(0, velocity.y, 0), maxSpeed * 2);
+        //scaledVelocity.y = body.velocity.y;
         if (setGroundedOverride) scaledVelocity.y = 0;
 
         body.velocity = scaledVelocity;
