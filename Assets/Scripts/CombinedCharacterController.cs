@@ -98,12 +98,12 @@ public class CombinedCharacterController : MonoBehaviour
         to = Quaternion.Euler(0, 0, 180);
         airAcceleration = maxAirAcceleration;
 
-        if (lockToXY)
-        {
-            Quaternion rot = transform.rotation;
-            transform.rotation = Quaternion.Euler(rot.eulerAngles.x, rot.eulerAngles.y + 90,
-                rot.eulerAngles.z);
-        }
+        //if (lockToXY)
+        //{
+        //    Quaternion rot = transform.rotation;
+        //    transform.rotation = Quaternion.Euler(rot.eulerAngles.x, rot.eulerAngles.y + 90,
+        //        rot.eulerAngles.z);
+        //}
         currentPlayerHP = HP;
 
         //controls = new InputControls();
