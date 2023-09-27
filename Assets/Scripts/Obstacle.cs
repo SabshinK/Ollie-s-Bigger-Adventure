@@ -7,12 +7,18 @@ namespace Circle
 {
     public class Obstacle : MonoBehaviour
     {
+        private void Awake()
+        {
+            var playerManager = FindObjectOfType<PlayerManager>();
+            
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                other.TryGetComponent(out PlayerManager player);
-                player.Hit();
+                if (other.TryGetComponent(out PlayerManager player))
+                    player.RegisterHit();
             }
         }
     }

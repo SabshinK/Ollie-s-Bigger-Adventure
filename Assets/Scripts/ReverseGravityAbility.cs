@@ -67,4 +67,13 @@ public class ReverseGravityAbility : MonoBehaviour
         to = from;
         from = temp;
     }
+
+    public void ResetGravity()
+    {
+        if (Physics.gravity.y > 0)
+        {
+            FlipGravity(new InputAction.CallbackContext());
+            playerModel.localRotation = to;
+        }
+    }
 }

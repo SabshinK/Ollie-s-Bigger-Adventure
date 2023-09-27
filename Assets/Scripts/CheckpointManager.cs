@@ -6,16 +6,11 @@ namespace Circle
 {
     public class CheckpointManager : MonoBehaviour
     {
-        [SerializeField] private Checkpoint current;
-        public Checkpoint Current
+        [SerializeField] private Transform current;
+        public Transform Current
         {
             get { return current; }
             set { current = value; }
-        }
-
-        public void SetSpawn(GameObject obj)
-        {
-            obj.transform.position = current.transform.position;
         }
     }
 }
