@@ -89,6 +89,15 @@ public class CombinedCharacterController : MonoBehaviour
     [HideInInspector]
     public float currentPlayerHP;
 
+    private void OnEnable()
+    {
+        GameState.onCutsceneEnter += Freeze;
+    }
+
+    private void OnDisable()
+    {
+        GameState.onCutsceneEnter -= Freeze;
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -176,37 +185,40 @@ public class CombinedCharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UpdateState();
-        MovePlayer();
-        // Get the current direction of gravity
-        gravityDirection = Mathf.Sign(Physics.gravity.y);
+        if (!GameState.IsScripted)
+        {
+            UpdateState();
+            MovePlayer();
+            // Get the current direction of gravity
+            gravityDirection = Mathf.Sign(Physics.gravity.y);
 
-        //if (desiredJump)
-        //{
-        //    desiredJump = false;
-        //    Jump();
-        //}
-
-
-        // setGroundedOverride = false;
-
-
-        Vector3 velocity = body.velocity;
-        Vector3 scaledVelocity = Vector3.ClampMagnitude(new Vector3(velocity.x, 0, velocity.z), maxSpeed) + Vector3.ClampMagnitude(new Vector3(0, velocity.y, 0), maxSpeed * 2);
-        //scaledVelocity.y = body.velocity.y;
-        if (setGroundedOverride) scaledVelocity.y = 0;
-
-        body.velocity = scaledVelocity;
+            //if (desiredJump)
+            //{
+            //    desiredJump = false;
+            //    Jump();
+            //}
 
 
-        // Control player rotation when operating in "Top-Down" mode
-        if (!lockToXY) RotateTowardsMouse();
+            // setGroundedOverride = false;
 
 
-        ClearState();
+            Vector3 velocity = body.velocity;
+            Vector3 scaledVelocity = Vector3.ClampMagnitude(new Vector3(velocity.x, 0, velocity.z), maxSpeed) + Vector3.ClampMagnitude(new Vector3(0, velocity.y, 0), maxSpeed * 2);
+            //scaledVelocity.y = body.velocity.y;
+            if (setGroundedOverride) scaledVelocity.y = 0;
 
-        Debug.DrawRay(transform.position, Physics.gravity);
-        body.AddForce(Physics.gravity); // Todo: shouldn't need this call
+            body.velocity = scaledVelocity;
+
+
+            // Control player rotation when operating in "Top-Down" mode
+            if (!lockToXY) RotateTowardsMouse();
+
+
+            ClearState();
+
+            Debug.DrawRay(transform.position, Physics.gravity);
+            body.AddForce(Physics.gravity); // Todo: shouldn't need this call
+        }
     }
 
     private void OnCollisionEnter(Collision collision) => EvaluateCollision(collision);
@@ -445,6 +457,11 @@ public class CombinedCharacterController : MonoBehaviour
         vector - contactNormal * Vector3.Dot(vector, contactNormal);
 
     private float GetMinDot(int layer) => minGroundDotProduct;
+
+    private void Freeze()
+    {
+        body.velocity = Vector3.zero;
+    }
 
     private enum Direction
     {
