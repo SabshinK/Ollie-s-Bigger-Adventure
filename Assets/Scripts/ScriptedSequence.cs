@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-using UnityEngine.SocialPlatforms.GameCenter;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Circle
 {
