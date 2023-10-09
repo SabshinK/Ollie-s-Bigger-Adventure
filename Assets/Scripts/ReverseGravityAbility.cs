@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using Cinemachine;
 using System.Collections;
+using System.Security.Cryptography;
 
 public class ReverseGravityAbility : MonoBehaviour
 {
@@ -50,14 +51,18 @@ public class ReverseGravityAbility : MonoBehaviour
 
     private void OnEnable()
     {
-        gravityAction.Enable();
+        EnableGravity();
         gravityAction.performed += FlipGravity;
+        GameState.onCutsceneEnter += DisableGravity;
+        GameState.onCutsceneExit += EnableGravity;
     }
 
     private void OnDisable()
     {
-        gravityAction.Disable();
+        DisableGravity();
         gravityAction.performed -= FlipGravity;
+        GameState.onCutsceneEnter -= DisableGravity;
+        GameState.onCutsceneExit -= EnableGravity;
     }
 
     private void Update()
@@ -108,5 +113,16 @@ public class ReverseGravityAbility : MonoBehaviour
             FlipGravity(new InputAction.CallbackContext());
             playerModel.localRotation = to;
         }
+    }
+
+    // This code could be better but we make do
+    public void EnableGravity()
+    {
+        gravityAction.Enable();
+    }
+
+    public void DisableGravity()
+    {
+        gravityAction.Disable();
     }
 }
