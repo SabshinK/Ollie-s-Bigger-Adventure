@@ -6,7 +6,7 @@ namespace Circle
 {
     public static class GameState
     {
-        public static bool IsScripted { get; private set; }
+        public static bool IsScripted { get; set; }
 
         public delegate void OnCutsceneEnter();
         public static event OnCutsceneEnter onCutsceneEnter;

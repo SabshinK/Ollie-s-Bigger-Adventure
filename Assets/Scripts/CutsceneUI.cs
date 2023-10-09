@@ -15,14 +15,24 @@ namespace Circle
 
         private void OnEnable()
         {
-            GameState.onCutsceneEnter += () => { anim?.SetBool("Cutscene", true); };
-            GameState.onCutsceneExit += () => { anim?.SetBool("Cutscene", false); };
+            GameState.onCutsceneEnter += EnterCutscene;
+            GameState.onCutsceneExit += ExitCutscene;
         }
 
         private void OnDisable()
         {
-            GameState.onCutsceneEnter -= () => { anim?.SetBool("Cutscene", true); };
-            GameState.onCutsceneExit -= () => { anim?.SetBool("Cutscene", false); };
+            GameState.onCutsceneEnter -= EnterCutscene;
+            GameState.onCutsceneExit -= ExitCutscene;
+        }
+
+        private void EnterCutscene()
+        {
+            anim?.SetBool("Cutscene", true);
+        }
+
+        private void ExitCutscene()
+        {
+            anim?.SetBool("Cutscene", false);
         }
     }
 }
