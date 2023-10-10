@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Slow Level.unity
+    guid: d6a96eaeacb9e8647b7b394d234b5fd0
   m_configObjects: {}
