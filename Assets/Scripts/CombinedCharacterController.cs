@@ -89,14 +89,23 @@ public class CombinedCharacterController : MonoBehaviour
     [HideInInspector]
     public float currentPlayerHP;
 
+    private PlayerManager manager;
+
+    private void Awake()
+    {
+        manager = FindObjectOfType<PlayerManager>();
+    }
+
     private void OnEnable()
     {
         GameState.onCutsceneEnter += Freeze;
+        manager.onDeath += Freeze;
     }
 
     private void OnDisable()
     {
         GameState.onCutsceneEnter -= Freeze;
+        manager.onDeath += Freeze;
     }
 
     // Start is called before the first frame update
@@ -185,7 +194,7 @@ public class CombinedCharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!GameState.IsScripted)
+        if (!GameState.IsScripted && manager.Health > 0)
         {
             UpdateState();
             MovePlayer();

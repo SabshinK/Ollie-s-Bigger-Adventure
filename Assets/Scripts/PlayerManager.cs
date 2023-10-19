@@ -11,10 +11,11 @@ namespace Circle
         private CheckpointManager checkman;
         private ReverseGravityAbility rgAbility;
 
-        private Rigidbody rb;
-
         public delegate void OnHit();
         public event OnHit onHit;
+
+        public delegate void OnDeath();
+        public event OnDeath onDeath;
 
         [SerializeField] private int health;
         public int Health
@@ -32,13 +33,12 @@ namespace Circle
             checkman = GetComponentInChildren<CheckpointManager>();
             rgAbility = GetComponentInChildren<ReverseGravityAbility>();
 
-            rb = GetComponentInChildren<Rigidbody>();
-
             health = defaultHealth;
         }
 
         private void OnEnable()
         {
+            InputHandler._inputs.Player.Movement.Enable();
             onHit += HitResponse;
 
             health = defaultHealth;
@@ -46,6 +46,7 @@ namespace Circle
 
         private void OnDisable()
         {
+            InputHandler._inputs.Player.Movement.Disable();
             onHit -= HitResponse;
         }
 
@@ -66,14 +67,13 @@ namespace Circle
             else
             {
                 // Death case
+                onDeath?.Invoke();
                 StartCoroutine(Death());
             }
         }
 
         private IEnumerator Death()
         {
-            // Game over splash screen
-
             yield return new WaitForSeconds(1);
 
             // Reload scene
