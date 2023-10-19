@@ -10,7 +10,7 @@ namespace Circle
 {
     public static class InputHandler
     {
-        private static Inputs _inputs;
+        public static Inputs _inputs;
 
         private static readonly Dictionary<string, InputActionMap> _maps;
 
