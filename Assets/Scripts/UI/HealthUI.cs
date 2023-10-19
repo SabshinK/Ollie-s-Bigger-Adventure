@@ -6,11 +6,20 @@ namespace Circle
 {
     public class HealthUI : MonoBehaviour
     {
-        PlayerManager player;
+        private PlayerManager player;
+
+        private List<Animator> hearts;
 
         private void Awake()
         {
             player = FindObjectOfType<PlayerManager>();
+
+            hearts = new List<Animator>();
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).TryGetComponent(out Animator anim))
+                    hearts.Add(anim);
+            }
         }
 
         private void OnEnable()
@@ -27,8 +36,8 @@ namespace Circle
 
         private void SetDefaultHealth()
         {
-            for (int i = 0; i < player.DefaultHealth; i++) 
-                SetHeart(i, true);
+            for (int i = 0; i < player.DefaultHealth; i++)
+                hearts[i].SetBool("IsFilled", true);
         }
 
         private void IncreaseHealth()
@@ -38,14 +47,7 @@ namespace Circle
 
         private void DecreaseHealth()
         {
-            SetHeart(player.Health, false);
-        }
-
-        private void SetHeart(int index, bool isFilled)
-        {
-            Transform child = transform.GetChild(index);
-            Animator anim = child?.GetComponent<Animator>();
-            anim?.SetBool("IsFilled", isFilled);
+            hearts[player.Health].SetBool("IsFilled", false);
         }
     }
 }
