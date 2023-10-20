@@ -85,6 +85,7 @@ public class CombinedCharacterController : MonoBehaviour
     //private InputControls controls;
 
     public ButtonControl jumpButton;
+    private InputAction movementAction;
 
     [HideInInspector]
     public float currentPlayerHP;
@@ -94,18 +95,21 @@ public class CombinedCharacterController : MonoBehaviour
     private void Awake()
     {
         manager = FindObjectOfType<PlayerManager>();
+        movementAction = InputHandler.GetAction("Movement");
     }
 
     private void OnEnable()
     {
-        GameState.onCutsceneEnter += Freeze;
+        GameManager.onCutsceneEnter += Freeze;
         manager.onDeath += Freeze;
+        manager.onHit += Freeze;
     }
 
     private void OnDisable()
     {
-        GameState.onCutsceneEnter -= Freeze;
-        manager.onDeath += Freeze;
+        GameManager.onCutsceneEnter -= Freeze;
+        manager.onDeath -= Freeze;
+        manager.onHit -= Freeze;
     }
 
     // Start is called before the first frame update
@@ -141,8 +145,8 @@ public class CombinedCharacterController : MonoBehaviour
 
         //playerInput.x = controls.SideScrollerMechanics.MoveHort.ReadValue<float>();
         //playerInput.z = controls.SideScrollerMechanics.MoveVert.ReadValue<float>();
-        playerInput.x = InputHandler.ReadValue<float>("Movement");
-        playerInput.z = InputHandler.ReadValue<float>("Movement");
+        playerInput.x = movementAction.ReadValue<float>();
+        playerInput.z = movementAction.ReadValue<float>();
         playerInput = Vector3.ClampMagnitude(playerInput, 1f);
 
         // Is the player operating in "Platform" mode?
@@ -194,7 +198,7 @@ public class CombinedCharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!GameState.IsScripted && manager.Health > 0)
+        if (!GameManager.IsScripted && manager.Health > 0)
         {
             UpdateState();
             MovePlayer();

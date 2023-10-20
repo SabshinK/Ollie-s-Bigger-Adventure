@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Circle
 {
-    public static class GameState
+    public static class GameManager
     {
         public static bool IsScripted { get; set; }
 
@@ -14,9 +14,7 @@ namespace Circle
         public delegate void OnCutsceneExit();
         public static event OnCutsceneExit onCutsceneExit;
 
-        public static bool IsTrapped { get; set; }
-
-        static GameState()
+        static GameManager()
         {
             // Nothing for now
         }
@@ -30,5 +28,12 @@ namespace Circle
 
             IsScripted = !IsScripted;
         }
+    }
+
+    public enum GameState
+    {
+        Playing,
+        Scripted,
+        UI
     }
 }

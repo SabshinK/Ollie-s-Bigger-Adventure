@@ -30,7 +30,7 @@ namespace Circle
         private IEnumerator Trapped()
         {
             // Do cutscene stuff
-            GameState.ToggleCutscene();
+            GameManager.ToggleCutscene();
 
             yield return new WaitForSeconds(0.5f);
 
@@ -48,7 +48,7 @@ namespace Circle
 
             yield return new WaitForSeconds(1f);
 
-            GameState.ToggleCutscene();
+            GameManager.ToggleCutscene();
 
             GetComponent<BoxCollider>().enabled = false;
         }

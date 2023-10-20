@@ -15,14 +15,14 @@ namespace Circle
 
         private void OnEnable()
         {
-            GameState.onCutsceneEnter += EnterCutscene;
-            GameState.onCutsceneExit += ExitCutscene;
+            GameManager.onCutsceneEnter += EnterCutscene;
+            GameManager.onCutsceneExit += ExitCutscene;
         }
 
         private void OnDisable()
         {
-            GameState.onCutsceneEnter -= EnterCutscene;
-            GameState.onCutsceneExit -= ExitCutscene;
+            GameManager.onCutsceneEnter -= EnterCutscene;
+            GameManager.onCutsceneExit -= ExitCutscene;
         }
 
         private void EnterCutscene()

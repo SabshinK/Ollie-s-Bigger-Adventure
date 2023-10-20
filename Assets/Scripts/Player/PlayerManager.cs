@@ -38,7 +38,7 @@ namespace Circle
 
         private void OnEnable()
         {
-            InputHandler._inputs.Player.Movement.Enable();
+            InputHandler.Inputs.Player.Enable();
             onHit += HitResponse;
 
             health = defaultHealth;
@@ -46,7 +46,7 @@ namespace Circle
 
         private void OnDisable()
         {
-            InputHandler._inputs.Player.Movement.Disable();
+            InputHandler.Inputs.Player.Disable();
             onHit -= HitResponse;
         }
 

@@ -10,26 +10,11 @@ namespace Circle
 {
     public static class InputHandler
     {
-        public static Inputs _inputs;
-
-        private static readonly Dictionary<string, InputActionMap> _maps;
+        public static Inputs Inputs { get; private set; }
 
         static InputHandler()
         {
-            _inputs = new Inputs();
-            _maps = new Dictionary<string, InputActionMap>();
-
-            //LoadMaps();
-        }
-
-        public static void EnableMap(string mapName)
-        {
-            _maps[mapName].Enable();
-        }
-
-        public static void DisableMap(string mapName)
-        {
-            _maps[mapName].Disable();
+            Inputs = new Inputs();
         }
 
         /// <summary>
@@ -40,85 +25,7 @@ namespace Circle
         /// <returns></returns>
         public static InputAction GetAction(string name)
         {
-            return _inputs.FindAction(name);
-        }
-
-        public static void EnableAction(string actionName)
-        {
-            InputAction action = _inputs.FindAction(actionName);
-            action.Enable();
-        }
-
-        public static void DisableAction(string actionName)
-        {
-            InputAction action = _inputs.FindAction(actionName);
-            action.Disable();
-        }
-
-        /// <summary>
-        /// idk man
-        /// </summary>
-        /// <param name="actionName"></param>
-        /// <param name="eventType"></param>
-        /// <param name="function"></param>
-        public static void Subscribe(string actionName, EventType eventType, Action<InputAction.CallbackContext> function)
-        {
-            InputAction action = _inputs.FindAction(actionName);
-            // Enable the action if it's disabled
-            if (!action.enabled)
-                action.Enable();
-
-            switch (eventType)
-            {
-                case EventType.Started: action.started += function; break;
-                case EventType.Performed: action.performed += function; break;
-                case EventType.Canceled: action.canceled += function; break;
-                default: break;
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="actionName"></param>
-        /// <param name="eventType"></param>
-        /// <param name="function"></param>
-        public static void Unsubscribe(string actionName, EventType eventType, Action<InputAction.CallbackContext> function)
-        {
-            InputAction action = _inputs.FindAction(actionName);
-            // Enable the action if it's disabled
-            if (!action.enabled)
-                action.Enable();
-
-            switch (eventType)
-            {
-                case EventType.Started: action.started -= function; break;
-                case EventType.Performed: action.performed -= function; break;
-                case EventType.Canceled: action.canceled -= function; break;
-                default: break;
-            }
-        }
-
-        public static T ReadValue<T>(string actionName) where T : struct
-        {
-            InputAction action = _inputs.FindAction(actionName, true);
-            // Enable the action if it's disabled
-            if (!action.enabled)
-                action.Enable();
-
-            return action.ReadValue<T>();
-        }
-
-        public static bool ReadKey(string actionName)
-        {
-            return _inputs.FindAction(actionName).IsPressed();
-        }
-
-        private static void LoadMaps()
-        {
-            //_maps.Add("PlayerActions", _inputs.PlayerActions);
-            //_maps.Add("Movement", _inputs.Movement);
-            //_maps.Add("Dialogue", _inputs.Dialogue);
+            return Inputs.FindAction(name);
         }
     }
 
