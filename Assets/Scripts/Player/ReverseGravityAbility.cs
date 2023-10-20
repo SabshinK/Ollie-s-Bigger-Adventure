@@ -51,7 +51,6 @@ public class ReverseGravityAbility : MonoBehaviour
 
     private void OnEnable()
     {
-        EnableGravity();
         gravityAction.performed += FlipGravity;
         GameManager.onCutsceneEnter += DisableGravity;
         GameManager.onCutsceneExit += EnableGravity;
@@ -59,7 +58,6 @@ public class ReverseGravityAbility : MonoBehaviour
 
     private void OnDisable()
     {
-        DisableGravity();
         gravityAction.performed -= FlipGravity;
         GameManager.onCutsceneEnter -= DisableGravity;
         GameManager.onCutsceneExit -= EnableGravity;
@@ -115,13 +113,12 @@ public class ReverseGravityAbility : MonoBehaviour
         }
     }
 
-    // This code could be better but we make do
-    public void EnableGravity()
+    private void EnableGravity()
     {
         gravityAction.Enable();
     }
 
-    public void DisableGravity()
+    private void DisableGravity()
     {
         gravityAction.Disable();
     }

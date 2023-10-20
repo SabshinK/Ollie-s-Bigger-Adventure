@@ -127,7 +127,7 @@ namespace Circle
                     ""id"": ""eebe51ca-737d-4c88-9fc1-00f51881b76f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=1.5)"",
                     ""initialStateCheck"": false
                 }
             ],

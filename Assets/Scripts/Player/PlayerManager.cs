@@ -50,6 +50,7 @@ namespace Circle
             onHit -= HitResponse;
         }
 
+        // Could be better, player should prolly have a collider on them checking for hurtboxes not this, but it works
         public void RegisterHit()
         {
             health--;

@@ -19,13 +19,13 @@ namespace Circle
 
         private void Awake()
         {
-            holdAction = InputHandler.GetAction("Toggle Gravity");
+            holdAction = InputHandler.GetAction("Hold");
             fill = transform.GetChild(0).GetComponent<Image>();
         }
 
         private void OnEnable()
         {
-            holdAction.Enable();
+            InputHandler.Inputs.UI.Enable();
 
             holdAction.started += StartTimer;
             holdAction.canceled += CancelTimer;
@@ -34,7 +34,7 @@ namespace Circle
 
         private void OnDisable()
         {
-            holdAction.Disable();
+            InputHandler.Inputs.UI.Disable();
 
             holdAction.started -= StartTimer;
             holdAction.canceled -= CancelTimer;
@@ -49,7 +49,6 @@ namespace Circle
 
         private void CancelTimer(InputAction.CallbackContext context)
         {
-            //Debug.Log("Cancelled");
             StopAllCoroutines();
             fill.fillAmount = 0;
         }

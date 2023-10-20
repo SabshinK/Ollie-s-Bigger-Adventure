@@ -15,5 +15,14 @@ namespace Circle
                     player.RegisterHit();
             }
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                if (collision.gameObject.TryGetComponent(out PlayerManager player))
+                    player.RegisterHit();
+            }
+        }
     }
 }
