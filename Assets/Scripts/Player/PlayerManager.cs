@@ -62,7 +62,7 @@ namespace Circle
             if (health > 0)
             {
                 // set checkpoint, put gravity back to normal
-                transform.position = checkman.Current.position;                
+                transform.position = checkman.Current.position;
                 rgAbility.ResetGravity();
             }
             else
