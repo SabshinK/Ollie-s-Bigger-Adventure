@@ -10,6 +10,8 @@ namespace Circle
         private InputAction gravityAction;
         private GravityFieldUI ui;
 
+        [SerializeField] private bool enableEnterText;
+
         private void Awake()
         {
             gravityAction = InputHandler.GetAction("Toggle Gravity");
@@ -20,7 +22,8 @@ namespace Circle
         {
             if (other.CompareTag("Player"))
             {
-                ui.SetStatus("Reverse Gravity Device Disabled");
+                if (enableEnterText)
+                    ui.SetStatus("Reverse Gravity Device Disabled");
                 gravityAction.Disable();
             }
         }

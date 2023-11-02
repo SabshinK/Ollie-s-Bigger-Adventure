@@ -14,6 +14,8 @@ namespace Circle
 
         private Animator anim;
 
+        private bool shouldStart = false;
+
         private void Awake()
         {
             gravityAction = InputHandler.GetAction("Toggle Gravity");
@@ -21,6 +23,8 @@ namespace Circle
             anim = GetComponent<Animator>();
 
             anim.SetBool("Enabled", false);
+
+            StartCoroutine(Debounce());
         }
 
         private void OnEnable()
@@ -37,8 +41,11 @@ namespace Circle
 
         private void StartTimer(InputAction.CallbackContext context)
         {
-            var interaction = context.interaction as HoldInteraction;
-            StartCoroutine(ChargeGravity(interaction.duration));
+            if (shouldStart)
+            {
+                var interaction = context.interaction as HoldInteraction;
+                StartCoroutine(ChargeGravity(interaction.duration));
+            }
         }
 
         private void CancelTimer(InputAction.CallbackContext context)
@@ -67,6 +74,13 @@ namespace Circle
 
             fill.fillAmount = 1;
             anim.SetBool("Enabled", false);
+        }
+
+        private IEnumerator Debounce()
+        {
+            yield return new WaitForSecondsRealtime(1f);
+
+            shouldStart = true;
         }
     }
 }
