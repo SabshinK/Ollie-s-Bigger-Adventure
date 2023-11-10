@@ -1138,7 +1138,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8183004376215950068, guid: 27cb521887eec6248b728ff9509ef58a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 718518688988936741, guid: 27cb521887eec6248b728ff9509ef58a, type: 3}
@@ -1147,7 +1148,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 718518688988936741, guid: 27cb521887eec6248b728ff9509ef58a, type: 3}
       insertIndex: 1
       addedObject: {fileID: 122828957}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5788868165971972798, guid: 27cb521887eec6248b728ff9509ef58a, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1112758690}
   m_SourcePrefab: {fileID: 100100000, guid: 27cb521887eec6248b728ff9509ef58a, type: 3}
 --- !u!4 &54034308 stripped
 Transform:
@@ -38652,6 +38656,30 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1112758680 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5788868165971972798, guid: 27cb521887eec6248b728ff9509ef58a, type: 3}
+  m_PrefabInstance: {fileID: 54034307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1112758690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112758680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa1db6f76a813e645bc4b209fda1e11d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 10
+  maxAcceleration: 1
+  maxAirAcceleration: 1
+  jumpHeight: 2
+  airJumps: 0
+  frictionSpeed: 10
+  preciseMovement: 1
 --- !u!1 &1120612759
 GameObject:
   m_ObjectHideFlags: 0
