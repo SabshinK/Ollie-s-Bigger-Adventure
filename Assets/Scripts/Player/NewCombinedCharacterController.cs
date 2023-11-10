@@ -7,7 +7,7 @@ using Circle;
 using UnityEngine.ProBuilder;
 
 [RequireComponent(typeof(Rigidbody))]
-public class CombinedCharacterController : MonoBehaviour
+public class NewCombinedCharacterController : MonoBehaviour
 {
     #region Configurable Fields
 

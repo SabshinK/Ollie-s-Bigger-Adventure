@@ -6,7 +6,7 @@
             "id": "6aaaef90-f7a1-4785-8019-afcbd47a2f40",
             "actions": [
                 {
-                    "name": "Movement",
+                    "name": "Horizontal",
                     "type": "Value",
                     "id": "8efd291a-6829-42e6-ab43-4f3810ab39cc",
                     "expectedControlType": "Axis",
@@ -26,13 +26,13 @@
             ],
             "bindings": [
                 {
-                    "name": "1D Axis",
+                    "name": "AD",
                     "id": "00843339-0648-44b9-a090-1017610052e0",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Horizontal",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -43,7 +43,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Horizontal",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -54,7 +54,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Horizontal",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },

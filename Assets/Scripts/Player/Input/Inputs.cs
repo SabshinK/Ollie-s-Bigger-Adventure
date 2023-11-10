@@ -30,7 +30,7 @@ namespace Circle
             ""id"": ""6aaaef90-f7a1-4785-8019-afcbd47a2f40"",
             ""actions"": [
                 {
-                    ""name"": ""Movement"",
+                    ""name"": ""Horizontal"",
                     ""type"": ""Value"",
                     ""id"": ""8efd291a-6829-42e6-ab43-4f3810ab39cc"",
                     ""expectedControlType"": ""Axis"",
@@ -50,13 +50,13 @@ namespace Circle
             ],
             ""bindings"": [
                 {
-                    ""name"": ""1D Axis"",
+                    ""name"": ""AD"",
                     ""id"": ""00843339-0648-44b9-a090-1017610052e0"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Horizontal"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -67,7 +67,7 @@ namespace Circle
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Horizontal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -78,7 +78,7 @@ namespace Circle
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Horizontal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -172,7 +172,7 @@ namespace Circle
 }");
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-            m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+            m_Player_Horizontal = m_Player.FindAction("Horizontal", throwIfNotFound: true);
             m_Player_ToggleGravity = m_Player.FindAction("Toggle Gravity", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -238,13 +238,13 @@ namespace Circle
         // Player
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-        private readonly InputAction m_Player_Movement;
+        private readonly InputAction m_Player_Horizontal;
         private readonly InputAction m_Player_ToggleGravity;
         public struct PlayerActions
         {
             private @Inputs m_Wrapper;
             public PlayerActions(@Inputs wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Movement => m_Wrapper.m_Player_Movement;
+            public InputAction @Horizontal => m_Wrapper.m_Player_Horizontal;
             public InputAction @ToggleGravity => m_Wrapper.m_Player_ToggleGravity;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
@@ -255,9 +255,9 @@ namespace Circle
             {
                 if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-                @Movement.started += instance.OnMovement;
-                @Movement.performed += instance.OnMovement;
-                @Movement.canceled += instance.OnMovement;
+                @Horizontal.started += instance.OnHorizontal;
+                @Horizontal.performed += instance.OnHorizontal;
+                @Horizontal.canceled += instance.OnHorizontal;
                 @ToggleGravity.started += instance.OnToggleGravity;
                 @ToggleGravity.performed += instance.OnToggleGravity;
                 @ToggleGravity.canceled += instance.OnToggleGravity;
@@ -265,9 +265,9 @@ namespace Circle
 
             private void UnregisterCallbacks(IPlayerActions instance)
             {
-                @Movement.started -= instance.OnMovement;
-                @Movement.performed -= instance.OnMovement;
-                @Movement.canceled -= instance.OnMovement;
+                @Horizontal.started -= instance.OnHorizontal;
+                @Horizontal.performed -= instance.OnHorizontal;
+                @Horizontal.canceled -= instance.OnHorizontal;
                 @ToggleGravity.started -= instance.OnToggleGravity;
                 @ToggleGravity.performed -= instance.OnToggleGravity;
                 @ToggleGravity.canceled -= instance.OnToggleGravity;
@@ -336,7 +336,7 @@ namespace Circle
         public UIActions @UI => new UIActions(this);
         public interface IPlayerActions
         {
-            void OnMovement(InputAction.CallbackContext context);
+            void OnHorizontal(InputAction.CallbackContext context);
             void OnToggleGravity(InputAction.CallbackContext context);
         }
         public interface IUIActions
