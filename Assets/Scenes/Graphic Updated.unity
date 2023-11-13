@@ -7215,7 +7215,19 @@ MonoBehaviour:
   snapToGroundProbeDistance: 2
   onFlipDirection:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1634970980}
+        m_TargetAssemblyTypeName: AnimationController, Assembly-CSharp
+        m_MethodName: FlipDirection
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &319452107
 GameObject:
   m_ObjectHideFlags: 0
@@ -30459,6 +30471,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &1634970980 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8142477135230232635, guid: 3304e31602f4e324eac34bfd31e6c921, type: 3}
+  m_PrefabInstance: {fileID: 7136269776438718753}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2359a864e8a79d64faa37a82a8960f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1646734978
 Mesh:
   m_ObjectHideFlags: 0

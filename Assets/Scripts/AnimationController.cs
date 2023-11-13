@@ -46,7 +46,7 @@ public class AnimationController : MonoBehaviour
     }
 
     // Should be subscribed to character controller
-    private void FlipDirection()
+    public void FlipDirection()
     {
         // Something like this? Basically when the flip direction event happens you can use this function to do particle things
         // Could even call a coroutine
