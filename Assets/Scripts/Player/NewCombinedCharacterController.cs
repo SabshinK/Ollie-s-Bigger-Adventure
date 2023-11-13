@@ -5,20 +5,22 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using Circle;
 using UnityEngine.ProBuilder;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class NewCombinedCharacterController : MonoBehaviour
 {
     #region Configurable Fields
 
-    [Header("Speed and physics controls:")] [Range(0f, 45f)] [Tooltip("Max speeds of each ability.")]
+    [Header("Speed/Physics Controls")] 
+    [Range(0f, 45f)] [Tooltip("Max speeds of each ability.")]
     [SerializeField] private float maxSpeed = 10f;
 
     [Range(0f, 5f)] [Tooltip("Max acceleration while walking.")]
     [SerializeField] private float maxAcceleration = 1f;
 
     [Range(0f, 5f)] [Tooltip("Max acceleration while in the air.")]
-    [SerializeField] private float maxAirAcceleration = 1f;
+    [SerializeField] private float maxAirAcceleration = 0.1f;
 
     [Range(0f, 10f)] [Tooltip("Max jump height.")]
     [SerializeField] private float jumpHeight = 2f;
@@ -27,10 +29,25 @@ public class NewCombinedCharacterController : MonoBehaviour
     [SerializeField] private int airJumps;
 
     [Range(-1, 10)] [Tooltip("Friction for the Player on the Ground'.")]
-    [SerializeField] private float frictionSpeed;
+    [SerializeField] private float frictionSpeed = 5f;
 
     [Tooltip("Turn on if you want the Player to stop on a dime when moving on the ground")]
     [SerializeField] private bool preciseMovement;
+
+    [Space]
+    [Header("Ramp Controls")] 
+    [Range(0, 90)] [Tooltip("Angle at which the player begins to slide down the slope.")]
+    [SerializeField] private float maxSlopeAngle = 45f;
+
+    [Range(0f, 100f)] [Tooltip("How tight to keep the player to the surface.")]
+    [SerializeField] private float maxSnapSpeed = 15f;
+
+    [Min(0f)] [Tooltip("Adjust based on height of player to keep player touching the surface.")]
+    [SerializeField] private float snapToGroundProbeDistance = 2f;
+
+    [Space]
+    [Header("Unity Events")]
+    [SerializeField] private UnityEvent onFlipDirection;
 
     #endregion
 
@@ -40,25 +57,12 @@ public class NewCombinedCharacterController : MonoBehaviour
      */
     #region Private Fields
 
-    /*    [Header("Ramp controls:")] [Range(0, 90)] [Tooltip("Angle at which the player begins to slide down the slope.")]*/
-    private float maxSlopeAngle = -45f;
-
-
-    /*    [Range(0f, 100f)] [Tooltip("How tight to keep the player to the surface.")]*/
-    private float maxSnapSpeed = 15f;
-
-    /*    [Min(0f)] [Tooltip("Adjust based on height of player to keep player touching the surface.")]*/
-    private float snapToGroundProbeDistance = 2f;
-
     private float snapForce = 5;
 
     private readonly LayerMask probeMask = -1;
-    private readonly float rotationSpeed = 720f;
     private Rigidbody body;
 
-    private Camera cam;
     private Vector3 contactNormal, steepNormal;
-    private bool desiredJump;
 
     private Direction direction = Direction.Right;
 
@@ -68,8 +72,6 @@ public class NewCombinedCharacterController : MonoBehaviour
 
     private int jumpPhase;
 
-    private Vector3 lookAt;
-
     private float minGroundDot;
     private Vector3 movementInput;
 
@@ -78,16 +80,13 @@ public class NewCombinedCharacterController : MonoBehaviour
     private int stepsSinceLastGrounded, stepsSinceLastJump;
     private Quaternion to = Quaternion.identity;
     private bool OnGround => groundContactCount > 0;
-    private bool OnSteep => steepContactCount > 0;
+    //private bool OnSteep => steepContactCount > 0;
 
     // A property to be overrided in other classes if they don't want the grounded method to fire
     protected internal bool OverrideOnGround { private get; set; }
 
     private float airAcceleration;
 
-    //private InputControls controls;
-
-    public ButtonControl jumpButton;
     private InputAction horizontalAction;
     private InputAction jumpAction;
 
@@ -122,10 +121,8 @@ public class NewCombinedCharacterController : MonoBehaviour
         manager.onHit -= Freeze;
     }
 
-    // Start is called before the first frame update
     private void Start()
     {
-        cam = Camera.main;
         body = GetComponent<Rigidbody>();
         to = Quaternion.Euler(0, 0, 180);
         airAcceleration = maxAirAcceleration;
@@ -141,16 +138,12 @@ public class NewCombinedCharacterController : MonoBehaviour
         //Debug.Log($"Angle between test vector {test} and up vector based on physics {-Physics.gravity.normalized}: {Vector3.Angle(test, -Physics.gravity)};");
     }
 
-    // Stay on ground stuff
     private void Update()
     {
         // Get horizontal and vertical inputs
         movementInput.x = horizontalAction.ReadValue<float>();
         //movementInput.z = verticalAction.ReadValue<float>();
-        // playerInput should already be normalized so this line is probably unnecessary
-        //playerInput = Vector3.ClampMagnitude(playerInput, 1f);
 
-        //playerInput.z = 0;
         // Useful for when things need to happen when the player flips
         // Might be able to use the cancelled event for this though? 
         switch (direction)
@@ -183,13 +176,7 @@ public class NewCombinedCharacterController : MonoBehaviour
         //{
         maxAirAcceleration = airAcceleration;
         //}
-
-        //CheckIfPlayerIsDead();
-
-        // No jumping in this game
-        //desiredJump |= jumpButton.isPressed;
     }
-
 
     private void FixedUpdate()
     {
@@ -243,6 +230,7 @@ public class NewCombinedCharacterController : MonoBehaviour
 
         stepsSinceLastJump = 0;
         jumpPhase += 1;
+
         float jumpSpeed = Mathf.Sqrt(Mathf.Abs(-2f * Physics.gravity.y) * jumpHeight * 2);
         jumpDirection = (jumpDirection + Vector3.up).normalized;
         float alignedSpeed = Vector3.Dot(body.velocity, jumpDirection);
@@ -251,26 +239,12 @@ public class NewCombinedCharacterController : MonoBehaviour
         body.AddForce(transform.up * jumpSpeed, ForceMode.VelocityChange);
     }
 
-    /// <summary>
-    ///     Tells this character controller to not apply gravity
-    ///     for a frame. Useful for wall jumps and grappling hooks.
-    /// </summary>
-    /// <param name="isGrounded"></param>
-    public void SetGrounded(bool isGrounded)
-    {
-        setGroundedOverride = isGrounded;
-    }
-
-    // Removes all ground contacts, steeps, etc.
-    private void ClearState()
-    {
-        groundContactCount = steepContactCount = 0;
-        contactNormal = steepNormal = Vector3.zero;
-    }
-
     // Handles flipping the player model
     private void FlipDirection()
     {
+        // Invoke event for other observers
+        onFlipDirection?.Invoke();
+
         Quaternion rot = transform.rotation;
         to = Quaternion.Euler(rot.eulerAngles.x, rot.eulerAngles.y + 180,
             rot.eulerAngles.z);
@@ -294,6 +268,13 @@ public class NewCombinedCharacterController : MonoBehaviour
             contactNormal = Vector3.up;
     }
 
+    // Removes all ground contacts, steeps, etc.
+    private void ClearState()
+    {
+        groundContactCount = steepContactCount = 0;
+        contactNormal = steepNormal = Vector3.zero;
+    }
+
     // Checks if the player should snap to the ground and if so does
     private bool SnapToGround()
     {
@@ -305,7 +286,7 @@ public class NewCombinedCharacterController : MonoBehaviour
         if (OverrideOnGround) return false;
 
         // Check... something lol
-        //if (stepsSinceLastGrounded > 1 || stepsSinceLastJump <= 2) return false;
+        if (stepsSinceLastGrounded > 1 || stepsSinceLastJump <= 2) return false;
 
         // Check if speed is greater than maxSnapSpeed?
         float speed = body.velocity.magnitude;
@@ -389,50 +370,36 @@ public class NewCombinedCharacterController : MonoBehaviour
         }
     }
 
-    /*
-     * There is a check going on here for the collisions. Basically, in the beginning of the game a variable called
-     * minGroundDot is calculated, which is the dot product of a slope with maxSlopeAngle. When comparing the 
-     * y value of the hit normal with the minGroundDot, any value less than minGroundDot is from an angle that is
-     * too steep and will be ignored. Because the gravity can flip there is an if case checking the gravity 
-     * direction and flipping the numbers.
-     * 
-     * It might be easier to find the angle between the vectors? It's probably less efficient but it might work.
-     */
+    // Modified from the original version, now this is just checking the angle between the two vectors
     private void EvaluateCollision(Collision collision)
     {
         for (var i = 0; i < collision.contactCount; i++)
         {
             Vector3 normal = collision.GetContact(i).normal;
+            float angle = Vector3.Angle(normal, -Physics.gravity);
 
-            if (gravityDirection > 0)
+            // Grounded case
+            if (angle <= maxSlopeAngle)
             {
-                if (normal.y <= -minGroundDot)
-                {
-                    groundContactCount += 1;
-                    contactNormal += normal;
-                }
-                else if (normal.y > -0.01f)
-                {
-                    steepContactCount += 1;
-                    steepNormal += normal;
-                }
+                groundContactCount += 1;
+                contactNormal += normal;
             }
             else
             {
-                if (normal.y >= minGroundDot)
-                {
-                    groundContactCount += 1;
-                    contactNormal += normal;
-                }
-                else if (normal.y > -0.01f)
-                {
-                    steepContactCount += 1;
-                    steepNormal += normal;
-                }
+                steepContactCount += 1;
+                steepNormal += normal;
             }
-
-            float angle = Vector3.Angle(normal, -Physics.gravity);
         }
+    }
+
+    /// <summary>
+    ///     Tells this character controller to not apply gravity
+    ///     for a frame. Useful for wall jumps and grappling hooks.
+    /// </summary>
+    /// <param name="isGrounded"></param>
+    public void SetGrounded(bool isGrounded)
+    {
+        setGroundedOverride = isGrounded;
     }
 
     private void Freeze()
