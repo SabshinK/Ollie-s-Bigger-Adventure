@@ -74,7 +74,7 @@ public class NewCombinedCharacterController : MonoBehaviour
 
     private float minGroundDot;
     private Vector3 movementInput;
-
+    public Vector2 MovementInput => movementInput;
 
     private bool setGroundedOverride;
     private int stepsSinceLastGrounded, stepsSinceLastJump;
@@ -208,6 +208,8 @@ public class NewCombinedCharacterController : MonoBehaviour
     private void OnCollisionStay(Collision collision) => EvaluateCollision(collision);
 
     #endregion
+
+    #region Custom Functions
 
     private void Jump(InputAction.CallbackContext context)
     {
@@ -406,6 +408,8 @@ public class NewCombinedCharacterController : MonoBehaviour
     {
         body.velocity = Vector3.zero;
     }
+
+    #endregion
 
     private enum Direction
     {

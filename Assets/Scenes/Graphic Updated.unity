@@ -1225,7 +1225,7 @@ SpriteRenderer:
   m_Size: {x: 51.58, y: 12.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &35532190
@@ -7191,6 +7191,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   current: {fileID: 0}
+--- !u!114 &311484905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311484901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa1db6f76a813e645bc4b209fda1e11d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 10
+  maxAcceleration: 1
+  maxAirAcceleration: 0.1
+  jumpHeight: 2
+  airJumps: 0
+  frictionSpeed: 5
+  preciseMovement: 0
+  maxSlopeAngle: 45
+  maxSnapSpeed: 15
+  snapToGroundProbeDistance: 2
+  onFlipDirection:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &319452107
 GameObject:
   m_ObjectHideFlags: 0
@@ -13439,7 +13464,7 @@ SpriteRenderer:
   m_Size: {x: 0.45, y: 3.66}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &636898310
@@ -15190,13 +15215,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4058586610612931628, guid: 381d566342cbffe47a1bc0d89cc89f1e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4622259935412364541, guid: 381d566342cbffe47a1bc0d89cc89f1e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7136269776438718754}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1840583522201341030, guid: 381d566342cbffe47a1bc0d89cc89f1e, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 311484905}
     - targetCorrespondingSourceObject: {fileID: 1840583522201341030, guid: 381d566342cbffe47a1bc0d89cc89f1e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 311484904}
@@ -20451,7 +20480,7 @@ SpriteRenderer:
   m_Size: {x: 0.45, y: 3.66}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1100523188
@@ -20550,7 +20579,7 @@ SpriteRenderer:
   m_Size: {x: 0.45, y: 3.66}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1129234545
@@ -40124,6 +40153,18 @@ PrefabInstance:
     - target: {fileID: 1722582346765196364, guid: 3304e31602f4e324eac34bfd31e6c921, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6639541055788482143, guid: 3304e31602f4e324eac34bfd31e6c921, type: 3}
+      propertyPath: m_Color.b
+      value: 0.21568629
+      objectReference: {fileID: 0}
+    - target: {fileID: 6639541055788482143, guid: 3304e31602f4e324eac34bfd31e6c921, type: 3}
+      propertyPath: m_Color.g
+      value: 0.21568629
+      objectReference: {fileID: 0}
+    - target: {fileID: 6639541055788482143, guid: 3304e31602f4e324eac34bfd31e6c921, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21568629
       objectReference: {fileID: 0}
     - target: {fileID: 7333937161660895706, guid: 3304e31602f4e324eac34bfd31e6c921, type: 3}
       propertyPath: m_Name
