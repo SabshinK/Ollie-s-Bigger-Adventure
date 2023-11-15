@@ -6,7 +6,7 @@ namespace Circle
 {
     public class CheckpointManager : MonoBehaviour
     {
-        [SerializeField] private Transform current;
+        private Transform current;
         public Transform Current
         {
             get { return current; }

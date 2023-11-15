@@ -71,8 +71,8 @@ public class ReverseGravityAbility : MonoBehaviour
         //to = transform.rotation;
 
         // We will use the local rotation because we are changing the root object rotation somewhere else
-        if (playerModel.localRotation != to)
-            playerModel.localRotation = Quaternion.Slerp(playerModel.localRotation, to, rotationSmoothing * Time.deltaTime);
+        //if (playerModel.localRotation != to)
+        //    playerModel.localRotation = Quaternion.Slerp(playerModel.localRotation, to, rotationSmoothing * Time.deltaTime);
 
         // Same as rotation, mess with the offset for the camera here
         if (offsetCamera && cfm.m_TrackedObjectOffset != toOffset)
@@ -102,6 +102,7 @@ public class ReverseGravityAbility : MonoBehaviour
         Quaternion tempRotation = to;
         to = from;
         from = tempRotation;
+        playerModel.localRotation = to;
     }
 
     public void ResetGravity()

@@ -1,18 +1,39 @@
+using Circle;
+using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AnimationController : MonoBehaviour
 {
-    private Animator animator; // Declare a variable to hold the Animator component
-    private ParticleSystem particles;
+    [Header("References")]
+    [SerializeField] private Animator animator; // Declare a variable to hold the Animator component
+    [SerializeField] private ParticleSystem particles;
+    [SerializeField] private SpriteRenderer sp;
 
-    private NewCombinedCharacterController cc;
+    [Space]
+    [SerializeField] private float flipParticleDuration = 0.5f;
+
+    private CombinedCharacterController cc;
+
+    private InputAction gravityAction;
 
     private void Awake()
     {
         // Get the Animator component attached to this GameObject
-        animator = GetComponent<Animator>();
-        cc = GetComponentInParent<NewCombinedCharacterController>();
+        cc = GetComponentInParent<CombinedCharacterController>();
+        //gravityAction = InputHandler.GetAction("Toggle Gravity");
+    }
+
+    private void OnEnable()
+    {
+        //gravityAction.performed += FlipGravity;
+    }
+
+    private void OnDisable()
+    {
+        //gravityAction.performed -= FlipGravity;
     }
 
     private void Update()
@@ -42,14 +63,27 @@ public class AnimationController : MonoBehaviour
         //    animator.SetBool("isMoving", false);
         //}
 
-        animator.SetFloat("Speed", cc.MovementInput.magnitude);
+        animator?.SetFloat("Speed", cc.MovementInput.magnitude);
+    }
+
+    private void FlipGravity(InputAction.CallbackContext context)
+    {
+        sp.flipY = !sp.flipY;
     }
 
     // Should be subscribed to character controller
     public void FlipDirection()
     {
-        // Something like this? Basically when the flip direction event happens you can use this function to do particle things
-        // Could even call a coroutine
-        //particles.play
+        //sp.flipX = !sp.flipX;
+        StartCoroutine(PlayForSeconds(flipParticleDuration));
+    }
+
+    public IEnumerator PlayForSeconds(float seconds)
+    {
+        particles?.Play();
+
+        yield return new WaitForSeconds(seconds);
+
+        particles?.Stop();
     }
 }
