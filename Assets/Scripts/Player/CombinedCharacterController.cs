@@ -79,7 +79,7 @@ public class CombinedCharacterController : MonoBehaviour
     private bool setGroundedOverride;
     private int stepsSinceLastGrounded, stepsSinceLastJump;
     private Quaternion to = Quaternion.identity;
-    private bool OnGround => groundContactCount > 0;
+    public bool OnGround => groundContactCount > 0;
     //private bool OnSteep => steepContactCount > 0;
 
     // A property to be overrided in other classes if they don't want the grounded method to fire
