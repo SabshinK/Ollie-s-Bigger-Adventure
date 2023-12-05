@@ -1540,8 +1540,9 @@ GameObject:
   m_Component:
   - component: {fileID: 97632457}
   - component: {fileID: 97632456}
+  - component: {fileID: 97632458}
   m_Layer: 0
-  m_Name: Electricity1_Front_Light (2)
+  m_Name: Electricity1_Front_Light_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1558,9 +1559,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9960785, g: 0.6509804, b: 0.28235295, a: 1}
   m_Intensity: 2.42
-  m_Range: 20
+  m_Range: 18
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1624,6 +1625,27 @@ Transform:
   m_Father: {fileID: 924731820}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &97632458
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97632455}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f876e9c792a97d84aa504b9227eb6822, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &122828956
 GameObject:
   m_ObjectHideFlags: 0
@@ -11643,7 +11665,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.6556604, g: 0.8561126, b: 1, a: 1}
-  m_Intensity: 0.4
+  m_Intensity: 0.62
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -28228,6 +28250,100 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &803195280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 803195281}
+  - component: {fileID: 803195282}
+  m_Layer: 0
+  m_Name: Level3_Window_Light (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &803195281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803195280}
+  m_LocalRotation: {x: 0.3375789, y: -0.7849392, z: 0.16488424, w: 0.4926703}
+  m_LocalPosition: {x: 31.4, y: 33.57, z: 5.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 924731820}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 36.262, y: -124.8, z: -27.114}
+--- !u!108 &803195282
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803195280}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 0.08031367, g: 0.067858815, b: 0.32941177, a: 1}
+  m_Intensity: 21.89
+  m_Range: 12.9
+  m_SpotAngle: 87.6
+  m_InnerSpotAngle: 17.1
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 2
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 6.64, y: 4.32}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &816727055
 GameObject:
   m_ObjectHideFlags: 0
@@ -28341,9 +28457,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6451578, b: 0.28773582, a: 1}
   m_Intensity: 2.42
-  m_Range: 20
+  m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -28642,8 +28758,9 @@ GameObject:
   m_Component:
   - component: {fileID: 873670164}
   - component: {fileID: 873670163}
+  - component: {fileID: 873670165}
   m_Layer: 0
-  m_Name: Electricity1_Back_Light (2)
+  m_Name: Electricity1_Back_Light_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28660,7 +28777,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9960785, g: 0.6509804, b: 0.28627452, a: 1}
   m_Intensity: 2.42
   m_Range: 10
   m_SpotAngle: 30
@@ -28726,6 +28843,27 @@ Transform:
   m_Father: {fileID: 924731820}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &873670165
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873670162}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: df0ccc751822b5a40a6c1fc7547bbb57, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &885962483
 GameObject:
   m_ObjectHideFlags: 0
@@ -28736,8 +28874,9 @@ GameObject:
   m_Component:
   - component: {fileID: 885962485}
   - component: {fileID: 885962484}
+  - component: {fileID: 885962486}
   m_Layer: 0
-  m_Name: Electricity1_Front_Light (1)
+  m_Name: Electricity1_Front_Light_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28754,7 +28893,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9960785, g: 0.6509804, b: 0.28235295, a: 1}
   m_Intensity: 2.42
   m_Range: 20
   m_SpotAngle: 30
@@ -28820,6 +28959,27 @@ Transform:
   m_Father: {fileID: 924731820}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &885962486
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885962483}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7debf6707810b8942b4c1988b12b34f3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &895702585
 GameObject:
   m_ObjectHideFlags: 0
@@ -28836,7 +28996,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &895702586
 Transform:
   m_ObjectHideFlags: 0
@@ -38951,6 +39111,7 @@ Transform:
   - {fileID: 97632457}
   - {fileID: 873670164}
   - {fileID: 154180563}
+  - {fileID: 803195281}
   m_Father: {fileID: 846969140}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -39048,8 +39209,9 @@ GameObject:
   m_Component:
   - component: {fileID: 959274006}
   - component: {fileID: 959274005}
+  - component: {fileID: 959274007}
   m_Layer: 0
-  m_Name: Electricity1_Back_Light (1)
+  m_Name: Electricity1_Back_Light_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39066,7 +39228,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6627451, b: 0.28235295, a: 1}
   m_Intensity: 2.42
   m_Range: 10
   m_SpotAngle: 30
@@ -39132,6 +39294,27 @@ Transform:
   m_Father: {fileID: 924731820}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &959274007
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959274004}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dba808dfb7efe2e49a247ebf7af7ca39, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &967785737
 GameObject:
   m_ObjectHideFlags: 0
@@ -41041,7 +41224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161072273}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 13.36, y: 31, z: 10.699757}
+  m_LocalPosition: {x: 7.58, y: 31, z: 10.699757}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41082,7 +41265,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.90588236, g: 0.36956394, b: 0, a: 1}
   m_Intensity: 4.46
-  m_Range: 29
+  m_Range: 25
   m_SpotAngle: 173.7
   m_InnerSpotAngle: 17.1
   m_CookieSize: 10
@@ -48177,6 +48360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1426779074}
   - component: {fileID: 1426779073}
+  - component: {fileID: 1426779075}
   m_Layer: 0
   m_Name: Electricity1_Back_Light
   m_TagString: Untagged
@@ -48195,7 +48379,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9921569, g: 0.64705884, b: 0.28235295, a: 1}
   m_Intensity: 2.42
   m_Range: 10
   m_SpotAngle: 30
@@ -48261,6 +48445,27 @@ Transform:
   m_Father: {fileID: 924731820}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1426779075
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426779072}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7847f2c4f84320a4eb3834cc7dfd3a42, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1452137300
 GameObject:
   m_ObjectHideFlags: 0
@@ -59106,7 +59311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598593808}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 13.36, y: 30.999523, z: -3.780239}
+  m_LocalPosition: {x: 13.36, y: 30.999523, z: -6.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -70242,7 +70447,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.90588236, g: 0.30921945, b: 0, a: 1}
   m_Intensity: 4.46
-  m_Range: 29
+  m_Range: 25
   m_SpotAngle: 173.7
   m_InnerSpotAngle: 17.1
   m_CookieSize: 10
@@ -70766,7 +70971,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803454266}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 4.16, y: 30.999523, z: -3.780239}
+  m_LocalPosition: {x: 4.16, y: 30.999523, z: -6.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
