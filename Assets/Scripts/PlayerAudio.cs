@@ -8,10 +8,10 @@ namespace Circle
     public class PlayerAudio : MonoBehaviour
     {
         [Header("Audio Clips")]
-        [SerializeField] private AudioClip[] footstepClips;
-        [SerializeField] private AudioClip chargeGravity;
-        [SerializeField] private AudioClip gravityUp;
-        [SerializeField] private AudioClip gravityDown;
+        [SerializeField] private AudioTrack footstepTrack;
+        [SerializeField] private AudioTrack chargeGravity;
+        [SerializeField] private AudioTrack gravityUp;
+        [SerializeField] private AudioTrack gravityDown;
 
         [Space]
         [Header("References")]
@@ -19,6 +19,13 @@ namespace Circle
 
         [SerializeField] private AudioSource footstepSource;
         [SerializeField] private AudioSource gravitySource;
+
+        private AudioPool audioPool;
+
+        private void Awake()
+        {
+            audioPool = FindObjectOfType<AudioPool>();
+        }
 
         private void OnEnable()
         {
@@ -32,13 +39,10 @@ namespace Circle
 
         private void PlayFootsteps()
         {
-            int index = Random.Range(0, footstepClips.Length);
+            int index = Random.Range(0, footstepTrack.clips.Length);
             float pitch = Random.Range(0.75f, 1.25f);
 
-            footstepSource.clip = footstepClips[index];
-            footstepSource.pitch = pitch;
-
-            
+            audioPool.PlayClipAtPoint(footstepTrack.clips[index], transform.position, pitch, footstepTrack.volume);
         }
 
         private void PlayChargeGravity()
@@ -55,5 +59,13 @@ namespace Circle
         {
 
         }
+    }
+
+    [System.Serializable]
+    struct AudioTrack
+    {
+        public AudioClip[] clips;
+
+        public float volume;
     }
 }

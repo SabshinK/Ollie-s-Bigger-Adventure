@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1035,13 +1035,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6b91f9cd25214449c1d48cc671ff38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footstepClips:
-  - {fileID: 8300000, guid: 463968ce7df122747b88856c20a60c61, type: 3}
-  - {fileID: 8300000, guid: b539f92e4d38314439908a31c9fa08d0, type: 3}
-  - {fileID: 8300000, guid: dd8b5eaaf443b4646885b9a82e659b9f, type: 3}
-  chargeGravity: {fileID: 0}
-  gravityUp: {fileID: 0}
-  gravityDown: {fileID: 0}
+  footstepTrack:
+    clips:
+    - {fileID: 8300000, guid: 463968ce7df122747b88856c20a60c61, type: 3}
+    - {fileID: 8300000, guid: b539f92e4d38314439908a31c9fa08d0, type: 3}
+    - {fileID: 8300000, guid: dd8b5eaaf443b4646885b9a82e659b9f, type: 3}
+    volume: 0.25
+  chargeGravity:
+    clips: []
+    volume: 0
+  gravityUp:
+    clips: []
+    volume: 0
+  gravityDown:
+    clips: []
+    volume: 0
   footstepEvent: {fileID: 6639541055455629704}
   footstepSource: {fileID: 0}
   gravitySource: {fileID: 0}
@@ -13463,6 +13471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 340602979}
+  - component: {fileID: 340602980}
   m_Layer: 0
   m_Name: Audio Pool
   m_TagString: Untagged
@@ -13485,6 +13494,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &340602980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340602978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72338e2dc09b14ffbb805f71a11da0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPoolSize: 10
+  prefab: {fileID: 1224180762702280949, guid: 29b27d1c1b5f2475cbcf036440495919, type: 3}
 --- !u!43 &341958163
 Mesh:
   m_ObjectHideFlags: 0
