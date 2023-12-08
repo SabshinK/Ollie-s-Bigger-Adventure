@@ -6,7 +6,7 @@ namespace Circle
 {
     public class AudioPool : ObjectPool
     {
-        public void PlayClipAtPoint(AudioClip clip, Vector3 position, float pitch = 1f, float volume = 1f)
+        public void PlayClipAtPoint(AudioClip clip, Vector3 position, float volume = 1f, float pitch = 1f)
         {
             GameObject audioObj = GetPooledObject();
             AudioActivator activator = audioObj.GetComponent<AudioActivator>();
