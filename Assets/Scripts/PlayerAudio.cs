@@ -61,7 +61,7 @@ namespace Circle
         private void PlayFootsteps()
         {
             int index = Random.Range(0, footstepTrack.clips.Length);
-            float pitch = Random.Range(0.75f, 1.25f);
+            float pitch = Random.Range(0.85f, 1.15f);
 
             audioPool.PlayClipAtPoint(footstepTrack.clips[index], transform.position, footstepTrack.volume, pitch);
         }
@@ -77,15 +77,11 @@ namespace Circle
         private IEnumerator ChargeGravity(float holdDuration)
         {
             float timer = 0;
-            GameObject audioObj = audioPool.GetPooledObject();
-            gravitySource = audioObj.GetComponent<AudioSource>();
 
             gravitySource.clip = chargeGravityTrack.clips[0];
             gravitySource.pitch = 1f;
             gravitySource.volume = chargeGravityTrack.volume;
-            gravitySource.loop = true;
 
-            audioObj.SetActive(true);
             gravitySource.Play();
 
             while (timer < holdDuration)
@@ -93,13 +89,9 @@ namespace Circle
                 // Update the timer
                 timer += Time.deltaTime;
 
-                gravitySource.pitch += timer / holdDuration;
-
                 yield return new WaitForEndOfFrame();
             }
 
-            gravitySource.pitch = 2f;
-            gravitySource.loop = false;
             gravitySource.Stop();
         }
 
