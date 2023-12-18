@@ -1,7 +1,5 @@
 using Circle;
 using System.Collections;
-using System.Diagnostics.CodeAnalysis;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
