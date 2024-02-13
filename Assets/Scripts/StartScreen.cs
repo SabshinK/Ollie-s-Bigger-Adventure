@@ -10,8 +10,8 @@ namespace Circle
        
        public void PlayGame()
        {
-            SceneManager.LoadSceneAsync(1);
-       }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
 
         public void QuitGame()
         {
