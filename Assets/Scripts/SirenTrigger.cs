@@ -2,18 +2,20 @@ using UnityEngine;
 
 namespace Circle 
 {
-    public class SirenTrigger1 : MonoBehaviour
+    public class SirenTrigger : MonoBehaviour
     {
-        private PlayerManager player;
-
         public Animator animator; // Reference to the Animator component
         public AudioSource audioSource; // Reference to the AudioSource component
         public string animationName; // The name of the animation to play
         public static float audioSpeedMultiplier = 1.0f; // Static to keep the speed increase across triggers
 
+        private PlayerManager player;
+        private BoxCollider trigger;
+
         private void Awake()
         {
             player = FindObjectOfType<PlayerManager>();
+            trigger = GetComponent<BoxCollider>();
         }
 
         private void OnEnable()
@@ -53,19 +55,19 @@ namespace Circle
                 }
 
                 // Turn off trigger
-                gameObject.SetActive(false);
+                trigger.enabled = false;
             }
         }
 
         private void Reset()
         {
-            gameObject.SetActive(true);
+            trigger.enabled = true;
             audioSpeedMultiplier = 1f;
             audioSource.pitch = 1f;
             audioSource.Stop();
 
             // Reset Animator
-            //animator.Play(animationName, -1, 0f);
+            animator.Play("SirenLight 0", -1, 0f);
             //animator.StartPlayback();
             //animator.StopPlayback();
             //animator.speed = 1;
