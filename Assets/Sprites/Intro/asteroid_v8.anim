@@ -20,20 +20,20 @@ AnimationClip:
       - serializedVersion: 3
         time: 0
         value: {x: 0, y: 0, z: 0}
-        inSlope: {x: 0, y: 0, z: -9.752837}
-        outSlope: {x: 0, y: 0, z: -9.752837}
+        inSlope: {x: 0, y: 0, z: -2.6166997}
+        outSlope: {x: 0, y: 0, z: -2.6166997}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
-        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.10358566}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.07267442}
       - serializedVersion: 3
-        time: 42.016666
+        time: 149.65
         value: {x: 0, y: 0, z: -360}
-        inSlope: {x: 0, y: 0, z: -9.667838}
-        outSlope: {x: 0, y: 0, z: -9.667838}
+        inSlope: {x: 0, y: 0, z: -2.3451574}
+        outSlope: {x: 0, y: 0, z: -2.3451574}
         tangentMode: 0
         weightedMode: 0
-        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.107569724}
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.077034816}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -65,7 +65,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 42.016666
+    m_StopTime: 149.65
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -130,20 +130,20 @@ AnimationClip:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: -9.752837
-        outSlope: -9.752837
+        inSlope: -2.6166997
+        outSlope: -2.6166997
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.10358566
+        outWeight: 0.07267442
       - serializedVersion: 3
-        time: 42.016666
+        time: 149.65
         value: -360
-        inSlope: -9.667838
-        outSlope: -9.667838
+        inSlope: -2.3451574
+        outSlope: -2.3451574
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.107569724
+        inWeight: 0.077034816
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
