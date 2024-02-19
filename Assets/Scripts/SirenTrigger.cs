@@ -50,7 +50,7 @@ namespace Circle
                 else
                 {
                     // Increase audio playback speed after each trigger
-                    audioSpeedMultiplier *= 1.25f;
+                    audioSpeedMultiplier *= 1.1f;
                     audioSource.pitch = audioSpeedMultiplier;
                 }
 
