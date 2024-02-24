@@ -16,17 +16,20 @@ namespace Circle
 
         private void OnTriggerEnter(Collider other)
         {
-            onTriggerEnter.Invoke(other);
+            if (other.CompareTag("Player"))
+                onTriggerEnter.Invoke(other);
         }
 
         private void OnTriggerStay(Collider other)
         {
-            onTriggerStay.Invoke(other);
+            if (other.CompareTag("Player"))
+                onTriggerStay.Invoke(other);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            onTriggerExit.Invoke(other);
+            if (other.CompareTag("Player"))
+                onTriggerExit.Invoke(other);
         }
     }
 }

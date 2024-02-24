@@ -39,6 +39,7 @@ namespace Circle
         private void OnEnable()
         {
             InputHandler.Inputs.Player.Enable();
+            InputHandler.Inputs.Player.ToggleGravity.Disable();
             onHit += HitResponse;
 
             health = defaultHealth;
