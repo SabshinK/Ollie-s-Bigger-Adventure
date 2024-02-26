@@ -13,6 +13,7 @@ namespace Circle
 
         private InputAction moveAction;
         private InputAction gravityAction;
+        private InputAction.CallbackContext? cachedContext;
 
         private int progress = 0;
 
@@ -20,13 +21,14 @@ namespace Circle
         {
             moveAction = InputHandler.Inputs.Player.Horizontal;
             gravityAction = InputHandler.Inputs.Player.ToggleGravity;
+
+            cachedContext = null;
         }
 
         private void OnEnable()
         {
             foreach (TriggerEventWrapper trigger in triggers)
                 trigger.onTriggerEnter.AddListener(EnableHint);
-            triggers[1].onTriggerExit.AddListener(DisableHintAlt);
 
             moveAction.performed += DisableHint;
             gravityAction.performed += DisableHint;
@@ -36,7 +38,6 @@ namespace Circle
         {
             foreach (TriggerEventWrapper trigger in triggers)
                 trigger.onTriggerEnter.RemoveListener(EnableHint);
-            triggers[1].onTriggerExit.RemoveListener(DisableHintAlt);
 
             moveAction.performed -= DisableHint;
             gravityAction.performed -= DisableHint;
@@ -45,22 +46,25 @@ namespace Circle
         private void EnableHint(Collider other)
         {
             animators[progress].SetBool("Enabled", true);
+
+            StartCoroutine(CallCache());
         }
 
         private void DisableHint(InputAction.CallbackContext context)
         {
+            // Don't do this part until there is a hint enabled
             if (animators[progress].GetBool("Enabled")) {
                 switch (progress)
                 {
                     case 0:
-                        if (context.control.name == "d")
+                        if (context.ReadValue<float>() > 0)
                         {
                             animators[progress].SetBool("Enabled", false);
                             progress++;
                         }
                         break;
                     case 1:
-                        if (context.control.name == "a")
+                        if (context.ReadValue<float>() < 0)
                         {
                             animators[progress].SetBool("Enabled", false);
                             progress++;
@@ -72,15 +76,29 @@ namespace Circle
                         break;
                 }
             }
+            else
+            {
+                /*
+                 * It's possible for this function to get called before a hint is ready.
+                 * In this case, the value should be stored for later so that DisableHint can be called again
+                 */
+                cachedContext = context;
+            }
         }
 
-        // This function catches the player if they speedrun past hint 2
-        private void DisableHintAlt(Collider other)
+        // Need a little bit of time before calling cached method otherwise it gets called too quickly
+        private IEnumerator CallCache()
         {
-            if (animators[progress].GetBool("Enabled"))
+            yield return new WaitForSeconds(0.5f);
+
+            /* 
+             * We need a check here to make sure the player isn't holding the next button. We don't
+             * need to care what button is being pressed, just that one currently is
+             */
+            if (moveAction.IsPressed() && cachedContext != null)
             {
-                animators[progress].SetBool("Enabled", false);
-                progress++;
+                DisableHint(cachedContext.Value);
+                cachedContext = null;
             }
         }
     }
