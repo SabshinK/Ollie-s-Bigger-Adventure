@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Slow Level.unity
     guid: d6a96eaeacb9e8647b7b394d234b5fd0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StartScreen.unity
     guid: d80bb38e4cc4595449bbae347d794954
   - enabled: 1
