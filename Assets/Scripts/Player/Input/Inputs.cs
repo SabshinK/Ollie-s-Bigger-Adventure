@@ -136,7 +136,7 @@ namespace Circle
                     ""id"": ""8c445afa-2f71-4059-81a1-bb434ecee709"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""initialStateCheck"": true
                 }
             ],
