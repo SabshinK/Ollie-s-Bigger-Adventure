@@ -5,17 +5,21 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 namespace Circle
 {
     public class HoldWheelUI : MonoBehaviour
     {
-        private Image fill;
-        private InputAction holdAction;
-
         [SerializeField] private int sceneToLoad = 0;
 
         [SerializeField] private UnityEvent onFilled;
+
+        [SerializeField] private VideoPlayer vp;
+        [SerializeField] private GameObject videoImg;
+
+        private Image fill;
+        private InputAction holdAction;        
 
         private void Awake()
         {
@@ -30,6 +34,8 @@ namespace Circle
             holdAction.started += StartTimer;
             holdAction.canceled += CancelTimer;
             onFilled.AddListener(SetScene);
+
+            vp.loopPointReached += EndVideo;
         }
 
         private void OnDisable()
@@ -39,6 +45,14 @@ namespace Circle
             holdAction.started -= StartTimer;
             holdAction.canceled -= CancelTimer;
             onFilled.RemoveListener(SetScene);
+
+            vp.loopPointReached -= EndVideo;
+        }
+
+        private void EndVideo(VideoPlayer vp)
+        {
+            vp.gameObject.SetActive(false);
+            videoImg.SetActive(false);
         }
 
         private void StartTimer(InputAction.CallbackContext context)

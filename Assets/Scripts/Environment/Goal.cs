@@ -7,11 +7,13 @@ namespace Circle
 {
     public class Goal : MonoBehaviour
     {
+        [SerializeField] private int scene = 2;
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(scene);
             }
         }
     }

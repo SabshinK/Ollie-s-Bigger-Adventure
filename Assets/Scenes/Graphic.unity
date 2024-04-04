@@ -1952,7 +1952,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f48ac6361ca74e242a071f5435aa4ea5, type: 2}
+  - {fileID: 2100000, guid: 647209861e2ba594e9b97a082c1058a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15411,7 +15411,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f48ac6361ca74e242a071f5435aa4ea5, type: 2}
+  - {fileID: 2100000, guid: 647209861e2ba594e9b97a082c1058a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -66097,7 +66097,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f48ac6361ca74e242a071f5435aa4ea5, type: 2}
+  - {fileID: 2100000, guid: 647209861e2ba594e9b97a082c1058a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -67769,7 +67769,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f48ac6361ca74e242a071f5435aa4ea5, type: 2}
+  - {fileID: 2100000, guid: 647209861e2ba594e9b97a082c1058a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102869,7 +102869,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f48ac6361ca74e242a071f5435aa4ea5, type: 2}
+  - {fileID: 2100000, guid: 647209861e2ba594e9b97a082c1058a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129902,7 +129902,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f48ac6361ca74e242a071f5435aa4ea5, type: 2}
+  - {fileID: 2100000, guid: 647209861e2ba594e9b97a082c1058a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157492,6 +157492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3e9a8b690db48408639b0041d55e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scene: 2
 --- !u!1 &7844531759032618018
 GameObject:
   m_ObjectHideFlags: 0
