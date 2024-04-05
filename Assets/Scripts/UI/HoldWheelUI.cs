@@ -25,6 +25,9 @@ namespace Circle
         {
             holdAction = InputHandler.GetAction("Hold");
             fill = transform.GetChild(0).GetComponent<Image>();
+
+            vp.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Version1_v01");
+            vp.Play();
         }
 
         private void OnEnable()
@@ -52,6 +55,7 @@ namespace Circle
         private void EndVideo(VideoPlayer vp)
         {
             vp.gameObject.SetActive(false);
+            vp.Stop();
             videoImg.SetActive(false);
         }
 
