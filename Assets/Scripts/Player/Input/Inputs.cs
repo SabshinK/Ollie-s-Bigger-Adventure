@@ -136,8 +136,26 @@ namespace Circle
                     ""id"": ""8c445afa-2f71-4059-81a1-bb434ecee709"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": ""Tap"",
+                    ""interactions"": ""Tap(duration=1.4,pressPoint=1)"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""71bad75b-0ada-4dfb-9866-96fc598fde65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap(duration=1,pressPoint=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""0857235b-eb3c-4c5e-922d-12932b8b305f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap(duration=1,pressPoint=1)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -228,6 +246,28 @@ namespace Circle
                     ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97ee5c8d-4154-4557-9d8b-2ae905c65a68"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""059c1002-ca83-41d7-94a7-1d73188617f9"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -242,6 +282,8 @@ namespace Circle
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Hold = m_UI.FindAction("Hold", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
+            m_UI_Left = m_UI.FindAction("Left", throwIfNotFound: true);
+            m_UI_Right = m_UI.FindAction("Right", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -359,12 +401,16 @@ namespace Circle
         private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
         private readonly InputAction m_UI_Hold;
         private readonly InputAction m_UI_Navigate;
+        private readonly InputAction m_UI_Left;
+        private readonly InputAction m_UI_Right;
         public struct UIActions
         {
             private @Inputs m_Wrapper;
             public UIActions(@Inputs wrapper) { m_Wrapper = wrapper; }
             public InputAction @Hold => m_Wrapper.m_UI_Hold;
             public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
+            public InputAction @Left => m_Wrapper.m_UI_Left;
+            public InputAction @Right => m_Wrapper.m_UI_Right;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -380,6 +426,12 @@ namespace Circle
                 @Navigate.started += instance.OnNavigate;
                 @Navigate.performed += instance.OnNavigate;
                 @Navigate.canceled += instance.OnNavigate;
+                @Left.started += instance.OnLeft;
+                @Left.performed += instance.OnLeft;
+                @Left.canceled += instance.OnLeft;
+                @Right.started += instance.OnRight;
+                @Right.performed += instance.OnRight;
+                @Right.canceled += instance.OnRight;
             }
 
             private void UnregisterCallbacks(IUIActions instance)
@@ -390,6 +442,12 @@ namespace Circle
                 @Navigate.started -= instance.OnNavigate;
                 @Navigate.performed -= instance.OnNavigate;
                 @Navigate.canceled -= instance.OnNavigate;
+                @Left.started -= instance.OnLeft;
+                @Left.performed -= instance.OnLeft;
+                @Left.canceled -= instance.OnLeft;
+                @Right.started -= instance.OnRight;
+                @Right.performed -= instance.OnRight;
+                @Right.canceled -= instance.OnRight;
             }
 
             public void RemoveCallbacks(IUIActions instance)
@@ -416,6 +474,8 @@ namespace Circle
         {
             void OnHold(InputAction.CallbackContext context);
             void OnNavigate(InputAction.CallbackContext context);
+            void OnLeft(InputAction.CallbackContext context);
+            void OnRight(InputAction.CallbackContext context);
         }
     }
 }

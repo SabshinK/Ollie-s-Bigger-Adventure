@@ -112,8 +112,26 @@
                     "id": "8c445afa-2f71-4059-81a1-bb434ecee709",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "Tap",
+                    "interactions": "Tap(duration=1.4,pressPoint=1)",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Left",
+                    "type": "Button",
+                    "id": "71bad75b-0ada-4dfb-9866-96fc598fde65",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap(duration=1,pressPoint=1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Right",
+                    "type": "Button",
+                    "id": "0857235b-eb3c-4c5e-922d-12932b8b305f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap(duration=1,pressPoint=1)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -204,6 +222,28 @@
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "97ee5c8d-4154-4557-9d8b-2ae905c65a68",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "059c1002-ca83-41d7-94a7-1d73188617f9",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
