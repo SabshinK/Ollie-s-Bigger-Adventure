@@ -7,6 +7,8 @@ namespace Circle
 {
     public class GravityDeviceTrigger : MonoBehaviour
     {
+        [SerializeField] private Animator anim;
+
         private InputAction gravityAction;
         private GravityFieldUI ui;
 
@@ -24,6 +26,8 @@ namespace Circle
             {
                 ui.SetStatus("Reverse Gravity Device Acquired");
                 gravityAction.Enable();
+
+                anim.SetTrigger("Pickup");
             }
         }
     }
