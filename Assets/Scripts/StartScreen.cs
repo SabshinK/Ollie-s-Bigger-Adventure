@@ -15,12 +15,12 @@ namespace Circle
 
         public void QuitGame()
         {
-#if UNITY_EDITOR
-            if (EditorApplication.isPlaying)
-                EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+//#if UNITY_EDITOR
+//            if (EditorApplication.isPlaying)
+//                EditorApplication.isPlaying = false;
+//#else
+//            Application.Quit();
+//#endif
         }
     }
 }
