@@ -52,8 +52,8 @@ namespace Circle
             player.Enable();
 
             holdAction.performed -= PressButton;
-            leftAction.performed += SelectPlayButton;
-            rightAction.performed += SelectQuitButton;
+            leftAction.performed -= SelectPlayButton;
+            rightAction.performed -= SelectQuitButton;
         }
 
         private void Start()

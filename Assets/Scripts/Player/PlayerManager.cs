@@ -76,7 +76,7 @@ namespace Circle
 
         private IEnumerator Death()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(3);
 
             // Reload scene
             SceneManager.LoadScene(0);

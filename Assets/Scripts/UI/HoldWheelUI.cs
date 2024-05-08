@@ -11,23 +11,15 @@ namespace Circle
 {
     public class HoldWheelUI : MonoBehaviour
     {
-        [SerializeField] private int sceneToLoad = 0;
-
-        [SerializeField] private UnityEvent onFilled;
-
-        [SerializeField] private VideoPlayer vp;
-        [SerializeField] private GameObject videoImg;
-
         private Image fill;
-        private InputAction holdAction;        
+        private InputAction holdAction;
+
+        private Coroutine routine;
 
         private void Awake()
         {
             holdAction = InputHandler.GetAction("Hold");
             fill = transform.GetChild(0).GetComponent<Image>();
-
-            vp.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Version1_v01");
-            vp.Play();
         }
 
         private void OnEnable()
@@ -36,9 +28,6 @@ namespace Circle
 
             holdAction.started += StartTimer;
             holdAction.canceled += CancelTimer;
-            onFilled.AddListener(SetScene);
-
-            vp.loopPointReached += EndVideo;
         }
 
         private void OnDisable()
@@ -47,27 +36,17 @@ namespace Circle
 
             holdAction.started -= StartTimer;
             holdAction.canceled -= CancelTimer;
-            onFilled.RemoveListener(SetScene);
-
-            vp.loopPointReached -= EndVideo;
-        }
-
-        private void EndVideo(VideoPlayer vp)
-        {
-            vp.gameObject.SetActive(false);
-            vp.Stop();
-            videoImg.SetActive(false);
         }
 
         private void StartTimer(InputAction.CallbackContext context)
         {
             var interaction = context.interaction as HoldInteraction;
-            StartCoroutine(FillBar(interaction.duration));
+            routine = StartCoroutine(FillBar(interaction.duration));
         }
 
         private void CancelTimer(InputAction.CallbackContext context)
         {
-            StopAllCoroutines();
+            if (routine != null) StopCoroutine(routine);
             fill.fillAmount = 0;
         }
 
@@ -88,13 +67,6 @@ namespace Circle
             }
 
             fill.fillAmount = 1;
-
-            onFilled?.Invoke();
-        }
-
-        private void SetScene()
-        {
-            SceneManager.LoadScene(sceneToLoad);
         }
     }
 }

@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Circle
 {
     public class GameOverUI : MonoBehaviour
     {
         private PlayerManager manager;
-        private TMP_Text text;
+        private Animator animator;
 
         private void Awake()
         {
             manager = FindObjectOfType<PlayerManager>();
-            text = GetComponent<TMP_Text>();
+            animator = GetComponent<Animator>();
         }
 
         private void OnEnable()
@@ -28,7 +29,7 @@ namespace Circle
 
         private void Enable()
         {
-            text.enabled = true;
+            animator.SetTrigger("Game Over");
         }
     }
 }
