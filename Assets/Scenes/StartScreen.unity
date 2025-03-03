@@ -7678,9 +7678,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1173971387}
-        m_TargetAssemblyTypeName: DamnGuys.Utilities.JavaScriptCommunicator, Assembly-CSharp
-        m_MethodName: SwitchToGame
-        m_Mode: 3
+        m_TargetAssemblyTypeName: Plugins.Circle.JavaScriptCommunicator, Assembly-CSharp-firstpass
+        m_MethodName: CueExitGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7736,7 +7736,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1173971382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b292282128fefbb4fbd09333e64a7b4f, type: 3}
+  m_Script: {fileID: 11500000, guid: b801ec66c4b84afa85230d3a2edc3995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1178321263
