@@ -4,6 +4,16 @@
   <meta charset="utf-8">
   <title>Unity WebGL Player | {{{ PRODUCT_NAME }}}</title>
   <style>
+    /* Reset margins and paddings for the entire page */
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Prevent scrollbars */
+      width: 100vw;
+      height: 100vh;
+      background: black; /* Black background for letterboxing/pillarboxing */
+    }
+
     /* Loading Screen Styling */
     #loading-screen {
       display: flex;
@@ -54,16 +64,15 @@
     /* Unity Container Styling */
     #unity-container {
       display: none;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: black; /* Black background for letterboxing/pillarboxing */
     }
     canvas {
       display: block;
-      width: 100%;
-      height: 100%;
-      border: none;
-      background: {{{ BACKGROUND_FILENAME ? 'url(\'Build/' + BACKGROUND_FILENAME.replace(/'/g, '%27') + '\') center / cover' : BACKGROUND_COLOR }}};
+      background: #231F20;
     }
   </style>
 </head>
@@ -80,7 +89,7 @@
 
 <!-- Unity WebGL container (hidden until game starts) -->
 <div id="unity-container" class="unity-desktop">
-  <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1" style="width: {{{ WIDTH }}}px; height: {{{ HEIGHT }}}px;"></canvas>
+  <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1"></canvas>
 </div>
 
 <script src="Build/{{{ LOADER_FILENAME }}}"></script>
@@ -91,20 +100,23 @@
   var loadingScreen = document.querySelector("#loading-screen");
   var progressBar = document.querySelector("#loading-progress");
   var startButton = document.querySelector("#start-button");
+
+  const cacheBuster = `?v=${Date.now()}`;
+
   var config = {
-    dataUrl: "Build/{{{ DATA_FILENAME }}}",
-    frameworkUrl: "Build/{{{ FRAMEWORK_FILENAME }}}",
+    dataUrl: `Build/{{{ DATA_FILENAME }}}${cacheBuster}`,
+    frameworkUrl: `Build/{{{ FRAMEWORK_FILENAME }}}${cacheBuster}`,
     #if USE_THREADS
-    workerUrl: "Build/{{{ WORKER_FILENAME }}}",
+    workerUrl: `Build/{{{ WORKER_FILENAME }}}${cacheBuster}`,
     #endif
     #if USE_WASM
-    codeUrl: "Build/{{{ CODE_FILENAME }}}",
+    codeUrl: `Build/{{{ CODE_FILENAME }}}${cacheBuster}`,
     #endif
     #if MEMORY_FILENAME
-    memoryUrl: "Build/{{{ MEMORY_FILENAME }}}",
+    memoryUrl: `Build/{{{ MEMORY_FILENAME }}}${cacheBuster}`,
     #endif
     #if SYMBOLS_FILENAME
-    symbolsUrl: "Build/{{{ SYMBOLS_FILENAME }}}",
+    symbolsUrl: `Build/{{{ SYMBOLS_FILENAME }}}${cacheBuster}`,
     #endif
     streamingAssetsUrl: "StreamingAssets",
     companyName: {{{ JSON.stringify(COMPANY_NAME) }}},
@@ -114,32 +126,59 @@
 
   // Mobile responsiveness
   if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-    var meta = document.createElement('meta');
+    const meta = document.createElement('meta');
     meta.name = 'viewport';
     meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
     document.getElementsByTagName('head')[0].appendChild(meta);
-
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
-    canvas.style.position = "fixed";
-
-    document.body.style.textAlign = "left";
   }
 
-  // Unity loading process
-  createUnityInstance(canvas, config, (progress) => {progressBar.style.width = 100 * progress + "%";})
-          .then((unityInstance) => {
-            console.log("Unity loaded successfully");
-            startButton.disabled = false;
-            // Start button click: Hide loading screen, show Unity, go fullscreen
-            startButton.addEventListener("click", () => {
-              loadingScreen.style.display = "none";
-              container.style.display = "block";
-            });
-          }).catch((message) => {
-            console.error("Unity failed to load: " + message);
-            alert("Failed to load the game. Please try again.");
-          });
+// Unity loading process
+  createUnityInstance(canvas, config, (progress) => {
+      progressBar.style.width = (100 * progress) + "%";
+    })
+      .then((unityInstance) => {
+        console.log("Unity loaded successfully");
+        startButton.disabled = false;
+        // Start button click: Hide loading screen, show Unity, go fullscreen
+        startButton.addEventListener("click", () => {
+          loadingScreen.style.display = "none";
+          container.style.display = "block";
+          resizeCanvas(); // Resize canvas on start
+        });
+      }).catch((message) => {
+        console.error("Unity failed to load: " + message);
+        alert("Failed to load the game. Please try again.");
+      });
+
+  // Resize the canvas to maintain aspect ratio and center it
+  function resizeCanvas() {
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    const gameAspect = 900 / 660; // Replace with your game's aspect ratio
+    const windowAspect = windowWidth / windowHeight;
+
+    let newWidth, newHeight;
+
+    if (windowAspect < gameAspect) {
+      // Window is taller than the game aspect ratio
+      newWidth = windowWidth;
+      newHeight = windowWidth / gameAspect;
+    } else {
+      // Window is wider than the game aspect ratio
+      newWidth = windowHeight * gameAspect;
+      newHeight = windowHeight;
+    }
+
+    canvas.style.width = `${newWidth}px`;
+    canvas.style.height = `${newHeight}px`;
+
+    container.style.width = `${newWidth}px`;
+    container.style.height = `${newHeight}px`;
+  }
+
+  // Listen for window resize events
+  window.addEventListener("resize", resizeCanvas);
 </script>
 </body>
 </html>
