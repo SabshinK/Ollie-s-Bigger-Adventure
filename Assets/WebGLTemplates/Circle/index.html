@@ -135,6 +135,7 @@
             startButton.addEventListener("click", () => {
               loadingScreen.style.display = "none";
               container.style.display = "block";
+              unityInstance.SetFullscreen(1);
             });
           }).catch((message) => {
             console.error("Unity failed to load: " + message);
