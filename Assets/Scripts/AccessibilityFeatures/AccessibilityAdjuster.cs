@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
@@ -65,7 +64,7 @@ namespace AccessibilityFeatures
             ApplySettings(_tempAccessibilitySettings);
         }
 
-        [Button]
+        [ContextMenu("Save Settings")]
         public void SaveSettings()
         {
             _previewMode = false;
@@ -76,7 +75,7 @@ namespace AccessibilityFeatures
             ApplySettings(_activeAccessibilitySettings);
         }
         
-        [Button]
+        [ContextMenu("Load Settings")]
         public AccessibilitySettings LoadSettings()
         {
             var saveData = PlayerPrefs.GetString("AccessibilitySettings");
